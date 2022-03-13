@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+message Person {
+    int32 age = 1;
+    string firstName = 2;
+    string lastName = 3;
+    bytes smallPicture = 4;
+    bool profileVerified = 5;
+    float height = 6;
+
+    enum EyeColor {
+        UNKNOWN_COLOR = 0;
+        GREEN = 1;
+        GROWN = 2;
+        BLUE = 3;
+    }
+
+    EyeColor eyeColor = 8;
+    Date birthDay = 9;
+
+    // Nested
+    message Address {
+        string addresLine1 = 1;
+        string addresLine2 = 2;
+        string zipCode = 3;
+        string city = 4;
+        string countr = 5;
+    }
+
+    // multiple addresses
+    repeated Address addresses = 10;
+}
+
+// Person's birhday
+message Date {
+    uint32 year = 1;
+    uint32 month = 2;
+    uint64 day = 3;
+}

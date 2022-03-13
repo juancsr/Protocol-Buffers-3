@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package my.date;
+
+message Date {
+    uint32 year = 1;
+    uint32 month = 2;
+    uint64 day = 3;
+}
