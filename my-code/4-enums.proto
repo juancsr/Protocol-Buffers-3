@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+message Person {
+    int32 age = 1;
+    string firstName = 2;
+    string lastName = 3;
+    bytes smallPicture = 4;
+    bool profileVerified = 5;
+    float height = 6;
+
+    enum EyeColor {
+        UNKNOWN_COLOR = 0;
+        GREEN = 1;
+        GROWN = 2;
+        BLUE = 3;
+    }
+
+    EyeColor eyeColor = 8;
+}

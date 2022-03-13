@@ -1,0 +1,16 @@
+// The syntanxis for the file is proto3
+syntax = "proto3";
+
+/* Person is used to identify users
+* across our system */
+message Person {
+    // the age as of the person's creation
+    int32 age = 1;
+    string firstName = 2;
+    string lastName = 3;
+    // the small represents a small .jpg file
+    bytes smallPicture = 4;
+    bool profileVerified = 5;
+    // height of the person in cms
+    float height = 6;
+}
