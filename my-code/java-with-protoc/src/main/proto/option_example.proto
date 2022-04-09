@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package example.options;
+
+// Setting up java packages when generated
+option java_package = "com.example.options";
+
+// using one file for each message
+option java_multiple_files = true;
+
+message OptionMessage {
+  int32 id = 1;
+  InnerOption inner_option = 2;
+}
+
+message InnerOption {
+  string value = 1;
+}
