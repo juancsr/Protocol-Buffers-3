@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package example.maps;
+
+option go_package = "pb/mapspb";
+
+message IdWrapper {
+    uint32 id = 1;
+}
+
+message MaxExample {
+    map<string, IdWrapper> ids = 1;
+}

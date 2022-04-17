@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package exercise.phone_number;
+
+import "protofiles/person.proto";
+
+option go_package = "pb/addressbookpb";
+
+// Our address book file is just one of these.
+message AddressBook {
+    repeated person.Person people = 1;
+}

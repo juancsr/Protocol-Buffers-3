@@ -10,7 +10,7 @@
 
 - The source code for this project (download / star the project): https://github.com/simplesteph/protobuf-example-go
 
-## Code generation in Golang
+## Code generation in Golang
 
 More information:
 https://developers.google.com/protocol-buffers/docs/reference/go-generated#package
@@ -64,7 +64,7 @@ option go_package = "pb/simplepb";
 ...
 ```
 
-## Reading and Writing to Disk
+## Reading and Writing to Disk
 
 ```go
 
@@ -136,8 +136,97 @@ func toJSON(pb protoiface.MessageV1) string {
 }
 ```
 
-## Enum Proto Struct in Golang
+## Enum Proto Struct in Golang
+
+```go
+func main() {
+	// ...
+	// enum
+	fmt.Println("doEnum:", doEnum())
+	// ...
+}
+
+func doEnum() *simplepb.Enumeration {
+	return &simplepb.Enumeration{
+		EyeColor: simplepb.EyeColor_EYE_COLOR_BROWN,
+	}
+}
+
+```
 
 ## Complex Proto Struct in Golang
 
-## Practice Exercise Goalang
+```go
+func main() {
+	// ...
+	// complex
+	fmt.Println("doComplex:", doComplex())
+	// ...
+}
+
+
+func doComplex() *complexpb.Complex {
+	return &complexpb.Complex{
+		OneDummy: &complexpb.Dummy{Id: 32, Name: "juancsr"},
+		MultiDummy: []*complexpb.Dummy{
+			{Id: 1, Name: "juancsr_1"},
+			{Id: 2, Name: "juancsr_2"},
+			{Id: 3, Name: "juancsr_3"},
+		},
+	}
+}
+```
+
+## Handling Maps in Golang
+
+```go
+func() {
+	// ...
+	// doMap
+	fmt.Println("doMap:", doMap())
+	// ...
+}
+
+func doMap() *mapspb.MaxExample {
+	return &mapspb.MaxExample{
+		Ids: map[string]*mapspb.IdWrapper{
+			"my_id_43": {Id: 43},
+			"my_id_44": {Id: 44},
+			"my_id_45": {Id: 45},
+		},
+	}
+}
+```
+
+## Handling OneOfs in Golang
+More info here:
+https://developers.google.com/protocol-buffers/docs/proto3#oneof
+
+
+
+
+```go
+func main() {
+	// ...
+	// oneof
+	doOneOf(&oneofspb.Result_Id{Id: 1})
+	doOneOf(&oneofspb.Result_Message{Message: "juancsr"})
+	// ...
+}
+
+func doOneOf(message interface{}) {
+	switch x := message.(type) {
+	case *oneofspb.Result_Id:
+		fmt.Println(message.(*oneofspb.Result_Id).Id)
+	case *oneofspb.Result_Message:
+		fmt.Println(message.(*oneofspb.Result_Message).Message)
+	default:
+		fmt.Errorf("message has unexpeced type: %v", x)
+	}
+}
+```
+
+
+## Practice Exercise Goalang
+
+Code is [here](./my-code/go-with-protoc/exercise.go)

@@ -1,0 +1,37 @@
+// See README.txt for information and build instructions.
+//
+// Note: START and END tags are used in comments to define sections used in
+// tutorials.  They are not part of the syntax for Protocol Buffers.
+//
+// To get an in-depth walkthrough of this file and the related examples, see:
+// https://developers.google.com/protocol-buffers/docs/tutorials
+
+// [START declaration]
+syntax = "proto3";
+package exercise.person;
+
+import "protofiles/phone_type.enum.proto";
+import "google/protobuf/timestamp.proto";
+// [END declaration]
+
+// [START go_declaration]
+option go_package = "pb/addressbookpb";
+// [END go_declaration]
+
+// [START messages]
+message Person {
+  string name = 1;
+  int32 id = 2;  // Unique ID number for this person.
+  string email = 3;
+
+  message PhoneNumber {
+    string number = 1;
+    enums.phone_type.PhoneType type = 2;
+  }
+
+  repeated PhoneNumber phones = 4;
+
+  google.protobuf.Timestamp last_updated = 5;
+}
+
+// [END messages]

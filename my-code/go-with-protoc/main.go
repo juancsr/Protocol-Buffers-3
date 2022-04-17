@@ -6,6 +6,9 @@ import (
 	"log"
 
 	"github.com/golang/protobuf/jsonpb"
+	"github.com/juancsr/protocol-buffers-udemy/go-with-protoc/src/pb/complexpb"
+	"github.com/juancsr/protocol-buffers-udemy/go-with-protoc/src/pb/mapspb"
+	"github.com/juancsr/protocol-buffers-udemy/go-with-protoc/src/pb/oneofspb"
 	"github.com/juancsr/protocol-buffers-udemy/go-with-protoc/src/pb/simplepb"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/runtime/protoiface"
@@ -19,6 +22,11 @@ func main() {
 		}
 	}()
 
+	// course()
+	exercise()
+}
+
+func course() {
 	sm := doSimple()
 	messageFile := "simple_message.bin"
 	if err := writeToFile(messageFile, sm); err != nil {
@@ -40,6 +48,57 @@ func main() {
 	var sm3 simplepb.SimpleMessage
 	fromJSON(sm2JSON, &sm3)
 	fmt.Println("Message from JSON: ", sm3)
+
+	// complex
+	fmt.Println("doComplex:", doComplex())
+
+	// enum
+	fmt.Println("doEnum:", doEnum())
+
+	// doMap
+	fmt.Println("doMap:", doMap())
+
+	// oneof
+	doOneOf(&oneofspb.Result_Id{Id: 1})
+	doOneOf(&oneofspb.Result_Message{Message: "juancsr"})
+}
+
+func doOneOf(message interface{}) {
+	switch x := message.(type) {
+	case *oneofspb.Result_Id:
+		fmt.Println(message.(*oneofspb.Result_Id).Id)
+	case *oneofspb.Result_Message:
+		fmt.Println(message.(*oneofspb.Result_Message).Message)
+	default:
+		fmt.Errorf("message has unexpeced type: %v", x)
+	}
+}
+
+func doMap() *mapspb.MaxExample {
+	return &mapspb.MaxExample{
+		Ids: map[string]*mapspb.IdWrapper{
+			"my_id_43": {Id: 43},
+			"my_id_44": {Id: 44},
+			"my_id_45": {Id: 45},
+		},
+	}
+}
+
+func doComplex() *complexpb.Complex {
+	return &complexpb.Complex{
+		OneDummy: &complexpb.Dummy{Id: 32, Name: "juancsr"},
+		MultiDummy: []*complexpb.Dummy{
+			{Id: 1, Name: "juancsr_1"},
+			{Id: 2, Name: "juancsr_2"},
+			{Id: 3, Name: "juancsr_3"},
+		},
+	}
+}
+
+func doEnum() *simplepb.Enumeration {
+	return &simplepb.Enumeration{
+		EyeColor: simplepb.EyeColor_EYE_COLOR_BROWN,
+	}
 }
 
 func fromJSON(json string, pb protoiface.MessageV1) {

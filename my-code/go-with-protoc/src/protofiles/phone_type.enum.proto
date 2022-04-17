@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package exercise.enums.phone_type;
+
+option go_package = "pb/addressbookpb";
+
+enum PhoneType {
+    MOBILE = 0;
+    HOME = 1;
+    WORK = 2;
+}
