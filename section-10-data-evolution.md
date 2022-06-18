@@ -7,7 +7,7 @@ The real problem here is **we don't want breaking changes**
 
 ### Backward compatible
 
-```proto
+```protobuf
 // Wirte
 syntax = "proto3";
 
@@ -29,7 +29,7 @@ In the above case, the server sends `first_name` & `last_name`. The client reads
 
 ### Forward compatible
 
-```proto
+```protobuf
 // Wirte
 syntax = "proto3";
 
@@ -59,7 +59,7 @@ Above case, the server sends the three values, but client only reads `first_name
 
 ## Renaming Fields
 
-```proto
+```protobuf
 // Server
 syntax = "proto3";
 
@@ -83,7 +83,7 @@ In the above code deserialization will be correct due `first_name` and `alias` h
 
 ## Removing Fields
 
-```proto
+```protobuf
 // Server
 syntax = "proto3";
 
@@ -106,7 +106,7 @@ we can use `reserved` in order to reserve a tag or the name of a property.
 
 ## Reserved Keyword
 
-```proto
+```protobuf
 syntax = "proto3";
 
 message Account {
